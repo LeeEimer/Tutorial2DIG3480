@@ -49,7 +49,7 @@ public class PlayerScript : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.collider.tag == "Floor")
         {
             if (Input.GetKey(KeyCode.W))
             {
