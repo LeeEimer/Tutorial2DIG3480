@@ -18,7 +18,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
-        score.GetComponent<Text>().text = "Score: " + scoreValue.ToString();
+
+        SetScoreText(); 
     }
 
     // Update is called once per frame
@@ -29,13 +30,19 @@ public class PlayerScript : MonoBehaviour
         rd2d.AddForce(new Vector2(hozMovement * speed, vertMovement * speed));
     }
 
+    void SetScoreText(){
+
+        score.text = "Score: " + scoreValue.ToString();
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-       if (collision.collider.tag == "Coin")
+       if (collision.collider.tag == "GameCoin")
         {
             scoreValue += 1;
             score.text = scoreValue.ToString();
-            Destroy(collision.collider.gameObject);
+            
+            Destroy(collision.collider.gameObject); 
+            SetScoreText(); 
         }
 
     }
