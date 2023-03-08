@@ -11,8 +11,10 @@ public class PlayerScript : MonoBehaviour
     public float speed;
 
     public TextMeshProUGUI score;
+    public GameObject winTextObj;
 
     private int scoreValue = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class PlayerScript : MonoBehaviour
         rd2d = GetComponent<Rigidbody2D>();
 
         SetScoreText(); 
+        winTextObj.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class PlayerScript : MonoBehaviour
 
         score.text = "Score: " + scoreValue.ToString();
     }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
        if (collision.collider.tag == "GameCoin")
@@ -43,6 +47,10 @@ public class PlayerScript : MonoBehaviour
             
             Destroy(collision.collider.gameObject); 
             SetScoreText(); 
+
+            if(scoreValue == 3){
+               winTextObj.SetActive(true);
+            }
         }
 
     }
