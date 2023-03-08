@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; 
+using TMPro; 
 
 public class PlayerScript : MonoBehaviour
 {
@@ -8,7 +10,7 @@ public class PlayerScript : MonoBehaviour
 
     public float speed;
 
-    public Text score;
+    public TextMeshProUGUI score;
 
     private int scoreValue = 0;
 
@@ -16,11 +18,11 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
-        score.text = scoreValue.ToString();
+        score.GetComponent<Text>().text = "Score: " + scoreValue.ToString();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         float hozMovement = Input.GetAxis("Horizontal");
         float vertMovement = Input.GetAxis("Vertical");
