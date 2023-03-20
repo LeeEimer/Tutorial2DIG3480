@@ -11,9 +11,11 @@ public class PlayerScript : MonoBehaviour
     public float speed;
 
     public TextMeshProUGUI score;
+    public TextMeshProUGUI life; 
     public GameObject winTextObj;
 
     private int scoreValue = 0;
+    private int lifeValue = 3; 
 
 
     // Start is called before the first frame update
@@ -37,6 +39,9 @@ public class PlayerScript : MonoBehaviour
 
         score.text = "Score: " + scoreValue.ToString();
     }
+    void setLifeText(){
+        life.text = "Life: " + lifeValue.ToString();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,10 +52,23 @@ public class PlayerScript : MonoBehaviour
             
             Destroy(collision.collider.gameObject); 
             SetScoreText(); 
-
-            if(scoreValue == 3){
+            if(scoreValue == 5){
+                //move to level 2
+                transform.position = new Vector2(0, -31); 
+            }
+            if(scoreValue == 9){
                winTextObj.SetActive(true);
             }
+        }
+        if(collision.collider.tag == "EndLvl"){
+            scoreValue += 1;
+            score.text = scoreValue.ToString();
+        }
+        if(collision.collider.tag == "Enemy"){
+            lifeValue -= 1; 
+            life.text = lifeValue.ToString();
+            Destroy(collision.collider.gameObject);
+            setLifeText(); 
         }
 
     }
