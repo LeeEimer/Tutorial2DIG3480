@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
     public TextMeshProUGUI score;
     public TextMeshProUGUI life; 
     public GameObject winTextObj;
+    public GameObject loseTextObj; 
 
     private int scoreValue = 0;
     private int lifeValue = 3; 
@@ -26,6 +27,7 @@ public class PlayerScript : MonoBehaviour
         SetScoreText(); 
         setLifeText();
         winTextObj.SetActive(false); 
+        loseTextObj.SetActive(false); 
     }
 
     // Update is called once per frame
@@ -55,7 +57,8 @@ public class PlayerScript : MonoBehaviour
             SetScoreText(); 
             if(scoreValue == 5){
                 //move to level 2
-                transform.position = new Vector2(0, -31); 
+                
+                rd2d.transform.position = new Vector2(0, -31); 
             }
             if(scoreValue == 9){
                winTextObj.SetActive(true);
@@ -70,6 +73,9 @@ public class PlayerScript : MonoBehaviour
             life.text = lifeValue.ToString();
             Destroy(collision.collider.gameObject);
             setLifeText(); 
+            if(lifeValue == 0){
+                loseTextObj.SetActive(true);
+            }
         }
 
     }
