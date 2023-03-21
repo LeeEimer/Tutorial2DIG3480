@@ -55,10 +55,6 @@ public class PlayerScript : MonoBehaviour
             
             Destroy(collision.collider.gameObject); 
             SetScoreText(); 
-            if(scoreValue == 4){
-                //move to level 2
-                //rd2d.transform.position = new Vector2(0, -31); 
-            }
             if(scoreValue == 8){
                winTextObj.SetActive(true);
             }
