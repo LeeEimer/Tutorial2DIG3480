@@ -18,18 +18,24 @@ public class PlayerScript : MonoBehaviour
     private int scoreValue = 0;
     private int lifeValue = 3; 
 
-    public AudioSource musicSource; 
+    public AudioSource Music;
+
+    public AudioClip lvl; 
+    public AudioClip endlvl;
 
     // Start is called before the first frame update
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
+        Music.GetComponent<AudioSource>();
+        
+        Music.clip = lvl;
 
         SetScoreText(); 
         setLifeText();
         winTextObj.SetActive(false); 
         loseTextObj.SetActive(false); 
-        //musicSource.Play();
+        Music.Play();
     }
 
     // Update is called once per frame
@@ -59,6 +65,9 @@ public class PlayerScript : MonoBehaviour
             SetScoreText(); 
             if(scoreValue == 8){
                winTextObj.SetActive(true);
+               Music.Stop();
+               Music.clip = endlvl;
+               Music.Play();
             }
         }
         if(collision.collider.tag == "Enemy"){
